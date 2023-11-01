@@ -21,7 +21,6 @@ public class CapersRepository {
     static final File CAPERS_FOLDER = join(CWD, ".capers"); // TODO Hint: look at the `join`
                                                             //      function in Utils
 
-    public static String added_text = "";
     /**
      * Does required filesystem operations to allow for persistence.
      * (creates any necessary folders or files)
@@ -43,15 +42,16 @@ public class CapersRepository {
      */
     public static void writeStory(String text) {
         // TODO
-        File STORY = join(CAPERS_FOLDER, "story.txt");
-        try {
-            STORY.createNewFile();
-        } catch (Exception e) {
-            System.err.println(e);
+        File storyFile = join(CAPERS_FOLDER, "story");
+        String newStoryContent;
+        if (!storyFile.exists()) {
+            newStoryContent = text;
+        } else {
+            String storyContent = readContentsAsString(storyFile);
+            newStoryContent = storyContent + "\n" + text;
         }
-        added_text += text;
-        writeContents(STORY, added_text);
-        System.out.println(readContentsAsString(STORY));
+        writeContents(storyFile, newStoryContent);
+        System.out.println(newStoryContent);
     }
 
     /**

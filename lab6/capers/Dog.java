@@ -57,6 +57,8 @@ public class Dog { // TODO
      */
     public void saveDog() {
         // TODO (hint: don't forget dog names are unique)
+        File SaveDogs = join(DOG_FOLDER, "savedDogs");
+        serializedContent = serialize()
     }
 
     @Override
